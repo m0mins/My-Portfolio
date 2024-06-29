@@ -18,7 +18,29 @@ def home(request):
     bio_data=data[0]
     experiences=ProfessionalExperience.objects.all()
     work_summery=WorkSummary.objects.all()
-    context = {'all_pricing':all_pricing,'skills':skills,'bio_data':bio_data,'experiences':experiences,'work_summery':work_summery}
+    #products = Product.objects.all()
+    product_details = []
+
+    for experience in experiences:
+        all_points = experience.exp_point.all()
+        product_detail = {
+            'experiences':experiences,
+            'company': experience.company,
+            'designation':experience.designation,
+            'start_date':experience.start_date,
+            'end_date':experience.end_date,
+            'address':experience.address,
+
+            'technology':experience.technology,
+
+            'points': [point.summary.details for point in all_points],
+        }
+
+        product_details.append(product_detail)
+    combined_data = [{'object': obj, 'product_name': name} for obj, name in zip(experiences, product_details)]
+
+    #context = {'combined_data': combined_data}
+    context = {'all_pricing':all_pricing,'skills':skills,'bio_data':bio_data,'experiences':experiences,'work_summery':work_summery,'combined_data':combined_data}
     return render(request, 'base.html', context)
 
 def contactUs(request):
@@ -54,3 +76,4 @@ def contactUs(request):
 #    all_pricing = Pricing.objects.all()
 #    context = {'all_pricing':all_pricing}
 #    return render(request, 'base.html', context)
+

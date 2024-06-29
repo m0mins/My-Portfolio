@@ -120,14 +120,33 @@ class WorkSummary(models.Model):
         return self.details 
     
 class ProfessionalExperience(models.Model):
+    company=models.CharField(max_length=100, blank=True,null=True)
     designation=models.CharField(max_length=100, blank=True,null=True)
     start_date=models.CharField(max_length=100, blank=True,null=True)
     end_date=models.CharField(max_length=100, blank=True,null=True)
     address=models.CharField(max_length=255, blank=True,null=True)
     technology=models.CharField(max_length=255, blank=True,null=True)
-    work_details = models.ForeignKey(WorkSummary, on_delete=models.CASCADE, related_name="work_points")
+    #work_details = models.ForeignKey(WorkSummary, on_delete=models.CASCADE, related_name="work_points")
 
     def __str__(self):
         return self.designation 
     
+class Experience_Summary(models.Model):
+    prof_exp = models.ForeignKey(ProfessionalExperience, on_delete=models.CASCADE,related_name='exp_point')
+    summary = models.ForeignKey(WorkSummary, on_delete=models.CASCADE,related_name='summary_list')
 
+    def __str__(self):
+        return f"{self.prof_exp.company} - {self.summary.details}"
+
+
+class EducationalHistory(models.Model):
+    degree=models.CharField(max_length=150, blank=True,null=True)
+    institute=models.CharField(max_length=255, blank=True,null=True)
+    start_year=models.CharField(max_length=255, blank=True,null=True)
+    end_year=models.CharField(max_length=255, blank=True,null=True)
+    result=models.FloatField(blank=True,null=True)
+    
+    quotation = models.TextField()
+
+    def __str__(self):
+        return self.degree 
