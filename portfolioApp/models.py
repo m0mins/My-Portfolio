@@ -83,6 +83,8 @@ class Profile(models.Model):
 
 
     about = models.TextField()
+    summary = models.TextField(blank=True,null=True)
+
 
     date_joined = models.DateTimeField(auto_now_add=True)
 

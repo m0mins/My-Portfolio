@@ -157,29 +157,24 @@
             <h3 class="resume-title">Sumary</h3>
 
             <div class="resume-item pb-0">
-              <h4>Brandon Johnson</h4>
-              <p><em>Innovative and deadline-driven Graphic Designer with 3+ years of experience designing and developing user-centered digital/print marketing material from initial concept to final, polished deliverable.</em></p>
+              <h4>{{bio_data.full_name}}</h4>
+              <p><em>{{bio_data.summary|linebreaks}}</em></p>
               <ul>
-                <li>Portland par 127,Orlando, FL</li>
-                <li>(123) 456-7891</li>
-                <li>alice.barkley@example.com</li>
+                <li>{{bio_data.address_1}}</li>
+                <li>{{bio_data.phone}}</li>
+                <li>{{bio_data.email}}</li>
               </ul>
             </div><!-- Edn Resume Item -->
-
             <h3 class="resume-title">Education</h3>
-            <div class="resume-item">
-              <h4>Master of Fine Arts &amp; Graphic Design</h4>
-              <h5>2015 - 2016</h5>
-              <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
-              <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p>
-            </div><!-- Edn Resume Item -->
+            {% for s in study %}
 
             <div class="resume-item">
-              <h4>Bachelor of Fine Arts &amp; Graphic Design</h4>
-              <h5>2010 - 2014</h5>
-              <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
-              <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p>
+              <h4>{{s.degree}}</h4>
+              <h5>{{s.start_year}} - {{s.end_year}}</h5>
+              <p><em>{{s.institute}}</em></p>
+              <p>{{s.quotation}}</p>
             </div><!-- Edn Resume Item -->
+            {%endfor%}
 
           </div>
 
@@ -798,10 +793,10 @@
         <p>© <span>Copyright</span> <strong class="px-1 sitename">SM Software Limited</strong> <span>All Rights Reserved</span></p>
       </div>
       <div class="social-links d-flex justify-content-center">
-        <a href=""><i class="bi bi-twitter-x"></i></a>
-        <a href="https://www.facebook.com/m0mins/"><i class="bi bi-facebook"></i></a>
+        <a href="{{bio_data.twitter}}"><i class="bi bi-twitter-x"></i></a>
+        <a href="{{bio_data.facebook}}"><i class="bi bi-facebook"></i></a>
         <a href=""><i class="bi bi-instagram"></i></a>
-        <a href="https://www.linkedin.com/in/m0mins/"><i class="bi bi-linkedin"></i></a>
+        <a href="{{bio_data.linkedIn}}"><i class="bi bi-linkedin"></i></a>
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->

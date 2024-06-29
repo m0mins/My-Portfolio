@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from portfolioApp.models import Contact,Pricing,Skills,Profile,ProfessionalExperience,WorkSummary
+from portfolioApp.models import Contact,Pricing,Skills,Profile,ProfessionalExperience,WorkSummary,EducationalHistory
 from django.shortcuts import render
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
@@ -17,7 +17,7 @@ def home(request):
     data=Profile.objects.all()
     bio_data=data[0]
     experiences=ProfessionalExperience.objects.all()
-    work_summery=WorkSummary.objects.all()
+    study=EducationalHistory.objects.all()
     #products = Product.objects.all()
     product_details = []
 
@@ -40,7 +40,7 @@ def home(request):
     combined_data = [{'object': obj, 'product_name': name} for obj, name in zip(experiences, product_details)]
 
     #context = {'combined_data': combined_data}
-    context = {'all_pricing':all_pricing,'skills':skills,'bio_data':bio_data,'experiences':experiences,'work_summery':work_summery,'combined_data':combined_data}
+    context = {'all_pricing':all_pricing,'skills':skills,'bio_data':bio_data,'experiences':experiences,'study':study,'combined_data':combined_data}
     return render(request, 'base.html', context)
 
 def contactUs(request):
