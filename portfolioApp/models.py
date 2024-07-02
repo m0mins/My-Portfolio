@@ -152,3 +152,40 @@ class EducationalHistory(models.Model):
 
     def __str__(self):
         return self.degree 
+class AppImages(models.Model):
+    title=models.CharField(max_length=100, blank=True,null=True)
+    #images = models.FileField(upload_to='App_Images',null=True, blank=True)
+
+    def __str__(self):
+        return self.details 
+
+class AppDetails(models.Model):
+    title = models.CharField(max_length=255, null=True, blank=True)
+    category=models.CharField(max_length=100, null=True, blank=True)
+    clinet=models.CharField(max_length=100, null=True, blank=True)
+    project_date=models.CharField(max_length=100, null=True, blank=True)
+    url=models.CharField(max_length=255, null=True, blank=True)
+    images = models.FileField(upload_to='AppDetails_Images',null=True, blank=True)
+    details = models.TextField(blank=True,null=True)
+
+    def __str__(self):
+        return self.title 
+
+class App_Image(models.Model):
+    app = models.ForeignKey(AppDetails, on_delete=models.CASCADE,related_name='app_details')
+    app_img = models.ImageField(upload_to='App_Images',null=True, blank=True)
+
+    #def __str__(self):
+    #    return f"{self.app.title} - {self.app_img.title}"
+#class Product_Image(models.Model):
+#    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='image_variants')
+#    image = models.ImageField(upload_to='Products')
+#
+#    def __str__(self):
+#        return f"{self.product.name}"
+
+class FrequentQuestion(models.Model):
+    question=models.CharField(max_length=100, blank=True,null=True)
+    answer = models.TextField(blank=True,null=True)
+    def __str__(self):
+        return f"{self.question}"

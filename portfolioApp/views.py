@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from portfolioApp.models import Contact,Pricing,Skills,Profile,ProfessionalExperience,WorkSummary,EducationalHistory
+from portfolioApp.models import Contact,Pricing,Skills,Profile,ProfessionalExperience,WorkSummary,EducationalHistory,AppDetails,App_Image
 from django.shortcuts import render
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
@@ -77,3 +77,25 @@ def contactUs(request):
 #    context = {'all_pricing':all_pricing}
 #    return render(request, 'base.html', context)
 
+#def app_details(request, pk):
+def apps_details(request,pk):
+    appss=AppDetails.objects.get(id=pk)
+    app_imgs=App_Image.objects.get(id=pk)
+    related_images = appss.app_details.all()
+    #print(f"############################ {app_imgs[0]}")
+    context = {
+        'app_id':appss.id,
+        'title': appss.title,
+        'category':appss.category,
+        'clinet': appss.clinet,
+        'project_date':appss.project_date,
+        'url': appss.url,
+        'images':appss.images,
+        'details': appss.details,
+        'app_imgs':app_imgs,
+        'related_images':related_images
+
+   
+    }
+
+    return render(request, "portfolioApp/portfolio-details.html",context)
